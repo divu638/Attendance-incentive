@@ -30,7 +30,6 @@ import {
   FileCheck,
 } from "lucide-react";
 import { api } from "../api.js";
-import BlockchainExplorer from "../components/BlockchainExplorer.jsx";
 import AttendanceCertificate from "../components/AttendanceCertificate.jsx";
 
 const short = (a) => (a ? `${a.slice(0, 6)}…${a.slice(-4)}` : "");
