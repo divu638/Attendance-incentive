@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 let supabase = null;
 let isConfigured = false;
@@ -153,13 +153,20 @@ const db = {
     async findByIdentifier(id) {
       const clean = (id || "").toLowerCase().trim();
       if (isConfigured) {
-        const { data, error } = await supabase
-          .from("users")
-          .select("*")
-          .or(`roll_no.ilike.${clean},wallet_address.ilike.${clean},email.ilike.${clean}`)
-          .maybeSingle();
-        if (error) throw error;
-        return toUser(data);
+        try {
+          const { data, error } = await supabase
+            .from("users")
+            .select("*")
+            .or(`roll_no.ilike.${clean},wallet_address.ilike.${clean}`)
+            .maybeSingle();
+          if (!error && data) {
+            const userObj = toUser(data);
+            const cached = mem.users.get(userObj.walletAddress?.toLowerCase());
+            if (cached?.privateKey) userObj.privateKey = cached.privateKey;
+            if (cached?.password) userObj.password = cached.password;
+            return userObj;
+          }
+        } catch (_err) {}
       }
       // Search in memory
       for (const u of mem.users.values()) {

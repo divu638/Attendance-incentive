@@ -22,13 +22,13 @@ const PORT = process.env.PORT || 5000;
 
 async function startServer() {
   try {
+    app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
     try {
       await listener.backfill();
       listener.start();
     } catch (chainErr) {
       console.warn("Chain listener note: Blockchain node might not be reachable yet (" + chainErr.message + "). Start hardhat node to sync events.");
     }
-    app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
   } catch (e) {
     console.error("Startup failed:", e.message);
     process.exit(1);
