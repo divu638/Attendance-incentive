@@ -688,3 +688,4 @@ Furthermore, the implementation of a **Hybrid Web3 Architecture**—combining on
 3. **Biometric Zero-Knowledge Proofs (ZK-SNARKs)**: Integrate privacy-preserving facial recognition or geolocation check-ins verified through Zero-Knowledge proofs to prevent physical impersonation while protecting student biometric privacy.
 4. **Institutional ERP & Learning Management System (LMS) Integration**: Expose webhooks and OAuth2 integrations to synchronize attendance data with standard university systems (Moodle, Blackboard, Canvas).
 5. **Decentralized Identifier (W3C DID) Onboarding**: Replace single-wallet bindings with verifiable student credentials, allowing students to port verified attendance records across universities and employer portals.
+

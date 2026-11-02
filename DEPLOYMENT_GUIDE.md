@@ -57,3 +57,4 @@ Follow this 3-step guide to take **Attendify** live on **GitHub**, **Vercel**, a
 - [`vercel.json`](./vercel.json): Configured SPA routing rewrites so page refreshes never return 404.
 - [`render.yaml`](./render.yaml): Auto-configures Render Node.js runtime.
 - [`frontend/src/api.js`](./frontend/src/api.js): Uses `VITE_API_URL` when in cloud production, and local proxy when offline.
+

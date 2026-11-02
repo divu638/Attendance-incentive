@@ -56,7 +56,7 @@ export default function Sidebar({ session, activeTab, setActiveTab }) {
       { id: "eligibility", label: "Reward Eligibility", emoji: "🎯", icon: Award },
       { id: "claim", label: "Claim Rewards", emoji: "🪙", icon: Coins },
       { id: "feedback", label: "Teacher Helpdesk & Feedback", emoji: "💬", icon: MessageSquare },
-      { id: "history", label: "Blockchain History", emoji: "⛓️", icon: History },
+      { id: "history", label: "My On-Chain Receipts", emoji: "🧾", icon: History },
       { id: "profile", label: "Student Profile", emoji: "🎓", icon: UserCheck },
       { id: "settings", label: "Settings", emoji: "⚙️", icon: Settings },
     ],
