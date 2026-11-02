@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, ShieldCheck, Zap, AlertCircle, GraduationCap, Lock, Mail, UserCheck } from "lucide-react";
+import { X, ShieldCheck, Zap, AlertCircle, GraduationCap, Lock, Mail, UserCheck, Copy, Check, Key } from "lucide-react";
 import { DEMO_ACCOUNTS } from "../chain.js";
 import AttendifyLogo from "./AttendifyLogo.jsx";
 
@@ -18,13 +18,14 @@ export default function WalletModal({
   const [tab, setTab] = useState("student"); // "student" | "wallet" | "faculty"
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const [copiedKey, setCopiedKey] = useState("");
 
   if (!isOpen) return null;
 
-  const handleStudentSubmit = (e) => {
-    e.preventDefault();
-    if (!identifier || !password) return;
-    loginWithCredentials(identifier.trim(), password.trim());
+  const copyText = (txt, label) => {
+    navigator.clipboard?.writeText(txt);
+    setCopiedKey(label);
+    setTimeout(() => setCopiedKey(""), 2000);
   };
 
   return (
@@ -192,6 +193,67 @@ export default function WalletModal({
               >
                 <span>⚡ 1-Click: Auto-Add Hardhat Local (31337) to MetaMask</span>
               </button>
+            </div>
+
+            {/* Quick Private Keys for MetaMask Import */}
+            <div style={{ marginTop: "1rem", padding: "0.9rem", background: "var(--bg-app)", borderRadius: "var(--radius-sm)", border: "1px solid var(--border)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.82rem", fontWeight: 700, marginBottom: "0.4rem", color: "var(--text-main)" }}>
+                <Key size={14} color="var(--primary)" />
+                <span>Want to test in MetaMask as Divya or Teacher?</span>
+              </div>
+              <p className="muted" style={{ fontSize: "0.76rem", margin: "0 0 0.7rem", lineHeight: 1.4 }}>
+                In MetaMask, click <strong>Account Dropdown → Add Account → Import Account</strong> and paste one of these private keys:
+              </p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.4rem 0.6rem", background: "rgba(255,255,255,0.03)", borderRadius: "4px", fontSize: "0.78rem" }}>
+                  <div>
+                    <strong>DIVYA (Student)</strong>
+                    <div style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>0x90F7...b906 (80% attendance)</div>
+                  </div>
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    style={{ padding: "0.2rem 0.5rem", fontSize: "0.72rem" }}
+                    onClick={() => copyText("0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6", "divya")}
+                  >
+                    {copiedKey === "divya" ? <Check size={12} color="var(--emerald)" /> : <Copy size={12} />}
+                    <span style={{ marginLeft: "0.2rem" }}>{copiedKey === "divya" ? "Copied" : "Copy Key"}</span>
+                  </button>
+                </div>
+
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.4rem 0.6rem", background: "rgba(255,255,255,0.03)", borderRadius: "4px", fontSize: "0.78rem" }}>
+                  <div>
+                    <strong>Ms. Sarabjit Kaur (Teacher)</strong>
+                    <div style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>0x7099...79C8 (Faculty)</div>
+                  </div>
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    style={{ padding: "0.2rem 0.5rem", fontSize: "0.72rem" }}
+                    onClick={() => copyText("0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d", "teacher")}
+                  >
+                    {copiedKey === "teacher" ? <Check size={12} color="var(--emerald)" /> : <Copy size={12} />}
+                    <span style={{ marginLeft: "0.2rem" }}>{copiedKey === "teacher" ? "Copied" : "Copy Key"}</span>
+                  </button>
+                </div>
+
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.4rem 0.6rem", background: "rgba(255,255,255,0.03)", borderRadius: "4px", fontSize: "0.78rem" }}>
+                  <div>
+                    <strong>University Admin</strong>
+                    <div style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>0xf39F...2266 (Deployer & Pool Funder)</div>
+                  </div>
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    style={{ padding: "0.2rem 0.5rem", fontSize: "0.72rem" }}
+                    onClick={() => copyText("0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80", "admin")}
+                  >
+                    {copiedKey === "admin" ? <Check size={12} color="var(--emerald)" /> : <Copy size={12} />}
+                    <span style={{ marginLeft: "0.2rem" }}>{copiedKey === "admin" ? "Copied" : "Copy Key"}</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
