@@ -19,21 +19,23 @@ import {
   Flame,
   Sparkles,
   MessageSquare,
+  Users,
+  BookOpen,
 } from "lucide-react";
 
 export default function Sidebar({ session, activeTab, setActiveTab }) {
   const role = session?.role || "student";
 
-  // Navigation Items with high-energy emojis and Lucide icons
+  // Navigation Items with formal college hierarchy & high-energy icons
   const navItemsByRole = {
     admin: [
-      { id: "overview", label: "Admin Hub", emoji: "👑", icon: LayoutDashboard },
-      { id: "teachers", label: "Authorize Faculty", emoji: "👨‍🏫", icon: UserPlus },
-      { id: "rules", label: "Incentive Rules", emoji: "⚙️", icon: Sliders },
-      { id: "funding", label: "Fund ETH Pool", emoji: "💎", icon: DollarSign },
-      { id: "reports", label: "Master Register", emoji: "📑", icon: FileSpreadsheet },
-      { id: "history", label: "Blockchain History", emoji: "⛓️", icon: History },
-      { id: "profile", label: "System Profile", emoji: "🛡️", icon: UserCheck },
+      { id: "overview", label: "Admin Dashboard", emoji: "👑", icon: LayoutDashboard },
+      { id: "students", label: "Manage Students", emoji: "🎓", icon: Users },
+      { id: "teachers", label: "Manage Faculty", emoji: "👩‍🏫", icon: UserCheck },
+      { id: "subjects", label: "Manage Subjects", emoji: "📚", icon: BookOpen },
+      { id: "reports", label: "Attendance Overview", emoji: "📑", icon: FileSpreadsheet },
+      { id: "rules", label: "Reward Management", emoji: "🪙", icon: Sliders },
+      { id: "history", label: "Blockchain Records", emoji: "⛓️", icon: History },
       { id: "settings", label: "Settings", emoji: "⚙️", icon: Settings },
     ],
     teacher: [
