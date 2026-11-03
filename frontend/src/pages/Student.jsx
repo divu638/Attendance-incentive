@@ -69,6 +69,7 @@ export default function Student({ contract, address, sendTx, notify, activeTab, 
         eligible,
         claimed,
         reward: formatEther(reward),
+        address,
       });
 
       const [se, att, rw, prof, msgs] = await Promise.all([
@@ -1000,7 +1001,7 @@ export default function Student({ contract, address, sendTx, notify, activeTab, 
                         type="button"
                         className="btn-secondary"
                         style={{ padding: "0.25rem 0.65rem", fontSize: "0.78rem" }}
-                        onClick={() => setShowCert(true)}
+                        onClick={() => setCertModalOpen(true)}
                       >
                         <FileCheck size={13} />
                         <span>View Certificate Seal</span>
@@ -1067,6 +1068,18 @@ export default function Student({ contract, address, sendTx, notify, activeTab, 
                 </button>
               </div>
             </div>
+
+            <div style={{ marginTop: "0.6rem" }}>
+              <button
+                type="button"
+                className="btn-emerald"
+                style={{ width: "100%", padding: "0.85rem", fontSize: "0.92rem", display: "flex", justifyContent: "center", alignItems: "center", gap: "0.5rem" }}
+                onClick={() => setCertModalOpen(true)}
+              >
+                <Award size={18} />
+                <span>🏆 View & Download Academic Consistency Certificate</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -1099,7 +1112,7 @@ export default function Student({ contract, address, sendTx, notify, activeTab, 
       {/* Official Web3 Soulbound Attendance Certificate Modal */}
       {certModalOpen && (
         <AttendanceCertificate
-          student={profile || { name: "Daisy Chawla", rollNo: "2329313" }}
+          student={profile || { name: "DIVYA", rollNo: "2329321", department: "Computer Science & Engineering", semester: "Semester 6" }}
           summary={sum}
           onClose={() => setCertModalOpen(false)}
         />
